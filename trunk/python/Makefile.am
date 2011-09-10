@@ -20,8 +20,6 @@ pkgpython_PYTHON = \
 	m3/rt_proxy.py\
 	m3/monitor.py\
 	m3/component_factory.py\
-	m3/trajectory.py\
-	m3/trajectory_pb2.py\
 	m3/component.py\
 	m3/toolbox.py\
 	m3/toolbox_ctrl.py\

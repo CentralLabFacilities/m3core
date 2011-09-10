@@ -24,7 +24,8 @@
 import time
 import m3.rt_proxy as m3p
 import m3.toolbox as m3t
-#import m3core.component_factory as m3f
+import m3.component_factory as m3f
+
 import math
 
 class M3Proc:
