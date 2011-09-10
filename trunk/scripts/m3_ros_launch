@@ -1,0 +1,3 @@
+#!/bin/bash
+
+roslaunch $M3_ROBOT/ros_config/mekabot.launch
