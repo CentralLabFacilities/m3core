@@ -14,8 +14,8 @@ for n in `seq 0 9`; do
 done
 
 insmod=/sbin/insmod
-m3ko=/lib/modules/$(uname -r)/m3/m3ec.ko
-MODULES=/usr/realtime/modules
+m3ko=/lib/modules/$(uname -r)/extra/m3ec.ko
+MODULES=/usr/realtime-2.6.32.11-rtai-3.8.1/modules
 
 #sync paranoia might be useful
 sync

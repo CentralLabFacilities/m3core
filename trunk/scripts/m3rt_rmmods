@@ -1,6 +1,6 @@
 #!/bin/sh
 
-MODULES=/usr/realtime/modules
+MODULES=/usr/realtime-2.6.32.11-rtai-3.8.1/modules
 
 if [ $UID != 0 ]; then SUDO="sudo "; else SUDO=""; fi
 
