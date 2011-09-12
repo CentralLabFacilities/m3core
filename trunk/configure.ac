@@ -110,7 +110,6 @@ AC_CONFIG_FILES([
 	Makefile
 	python/Makefile
 	src/m3rt/base/Makefile
-	src/m3rt/bootloader/Makefile
 	src/m3rt/ethercat/Makefile
 	src/m3rt/rt_system/Makefile
 ])

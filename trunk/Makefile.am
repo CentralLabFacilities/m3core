@@ -27,7 +27,6 @@ AM_CPPFLAGS = -g
 SUBDIRS = src/m3rt/base \
 	src/m3rt/ethercat \
 	src/m3rt/rt_system \
-	src/m3rt/bootloader \
 	python
 
 
