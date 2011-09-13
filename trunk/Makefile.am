@@ -36,8 +36,7 @@ dist_bin_SCRIPTS = \
 	scripts/m3rt_server_run \
 	scripts/m3rt_server_kill \
 	scripts/lsec scripts/m3rt_insmods \
-	scripts/m3rt_rmmods \
-	scripts/m3_ros_launch
+	scripts/m3rt_rmmods	
 
 EXTRA_DIST = \
         autogen.sh \

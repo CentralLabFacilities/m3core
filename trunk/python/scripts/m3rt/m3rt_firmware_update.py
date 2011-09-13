@@ -24,7 +24,7 @@ import glob
 import sys
 import  m3.m3_bootloader
 import m3.m3rt_toolbox as m3t
-import m3.toolbox as m3b
+import m3.toolbox_core as m3b
 
 def echub_init():
 	print 'Opening ECHUB Port3 on Slave 0'

@@ -22,7 +22,7 @@
 #POSSIBILITY OF SUCH DAMAGE.
 
 import m3.rt_proxy as m3p
-import m3.toolbox as m3t
+import m3.toolbox_core as m3t
 
 PKG = 'm3_client' # this package name
 

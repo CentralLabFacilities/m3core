@@ -30,7 +30,7 @@ import m3.m3rt_system
 import m3.component_base_pb2 as m3b
 import socket
 import m3.rt_proxy as m3p
-import m3.toolbox as m3t
+import m3.toolbox_core as m3t
 from threading import Thread
 
 	

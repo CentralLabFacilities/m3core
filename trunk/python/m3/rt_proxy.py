@@ -20,7 +20,7 @@ import sys
 import xmlrpclib
 import array
 import m3.component_base_pb2 as mbs
-import m3.toolbox as m3t
+import m3.toolbox_core as m3t
 import time
 import os
 

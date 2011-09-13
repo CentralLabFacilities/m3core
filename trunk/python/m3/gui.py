@@ -17,7 +17,7 @@
 
 
 from time import sleep
-import m3.toolbox as m3t
+import m3.toolbox_core as m3t
 import m3.widgets as m3w
 import pygtk
 pygtk.require('2.0')

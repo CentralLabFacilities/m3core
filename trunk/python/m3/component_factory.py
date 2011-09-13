@@ -3,7 +3,7 @@
 
 import yaml
 import os 
-import m3.toolbox as m3t
+import m3.toolbox_core as m3t
 import m3.monitor
 
 component_map={
