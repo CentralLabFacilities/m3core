@@ -334,8 +334,9 @@ def get_robot_name():
 
         for cdir in config['rt_components'].keys():
                 for c in config['rt_components'][cdir].keys():
-                        if config['rt_components'][cdir][c] == 'm3humanoid':
+                        if config['rt_components'][cdir][c] == 'm3humanoid' or config['rt_components'][cdir][c] == 'm3humanoid_sea':
                                 return c
+        return ''
         return ''
 
 def get_m3_config():

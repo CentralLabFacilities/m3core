@@ -22,8 +22,6 @@ pkgpython_PYTHON = \
 	m3/component_factory.py\
 	m3/component.py\
 	m3/toolbox.py\
-	m3/toolbox_ctrl.py\
-	m3/toolbox_beh.py\
 	m3/widgets.py\
 	m3/gui.py\
 	m3/unit_conversion.py \

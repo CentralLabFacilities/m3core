@@ -46,9 +46,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 //Convenience printf-like macros for printing M3-specific information.
-#define M3_INFO(fmt, args...) rt_printk(KERN_INFO "M3 INFO: " fmt, ##args)
-#define M3_ERR(fmt, args...) rt_printk(KERN_ERR "M3 ERROR: " fmt, ##args)
-#define M3_WARN(fmt, args...) rt_printk(KERN_WARNING "M3 WARNING: " fmt, ##args)
+#define M3_INFO(fmt, args...) printk(KERN_INFO "M3 INFO: " fmt, ##args)
+#define M3_ERR(fmt, args...) printk(KERN_ERR "M3 ERROR: " fmt, ##args)
+#define M3_WARN(fmt, args...) printk(KERN_WARNING "M3 WARNING: " fmt, ##args)
 
 #define USE_DISTRIBUTED_CLOCKS //Version 1.0 and newer
 
