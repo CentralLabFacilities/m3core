@@ -19,9 +19,8 @@
 ## Process this file with automake to produce Makefile.in
 
 m3_dir = $(top_srcdir)/src
-ros_dir = /opt/ros/cturtle/
-rtai_inc = /usr/realtime-2.6.32.11-rtai-3.8.1/include 
-
+rtai_inc = $(RTAI_DIR)/include  
+ros_dir = $(ROS_DIR)
 clean-local:
 	rm -f component_base.pb.cpp
 	rm -f component_base.pb.h
@@ -76,7 +75,7 @@ libm3base_la_LDFLAGS = -version-info 1:0:0 -module \
 	-L$(ros_dir)/ros/core/roslib/lib \
 	-L$(ros_dir)/ros/core/rosconsole/lib  \
 	-L$(ros_dir)/ros/3rdparty/xmlrpcpp/lib \
-	-L/usr/realtime-2.6.32.11-rtai-3.8.1/lib
+	-L$(RTAI_DIR)/lib
 	
 libm3base_la_CPPFLAGS =  -I$(m3_dir) -Wl,-E -ffast-math -pipe -mhard-float\
 	-I$(rtai_inc) \

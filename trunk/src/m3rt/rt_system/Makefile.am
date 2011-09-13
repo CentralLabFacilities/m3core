@@ -20,8 +20,8 @@
 #//////////////////////////////////////////////////////////////////
 
 m3_dir = $(top_srcdir)/src
-rtai_inc = /usr/realtime-2.6.32.11-rtai-3.8.1/include 
-ros_dir = /opt/ros/cturtle
+rtai_inc = $(RTAI_DIR)/include  
+ros_dir = $(ROS_DIR)
 
 EXTRA_DIST = \
 	rt_system.h\
@@ -73,7 +73,7 @@ _m3rt_system_la_CPPFLAGS = \
 	-I$(top_srcdir)/ros/m3_msgs/msg_gen/cpp/include \
 	$(RT)
 	
-_m3rt_system_la_LDFLAGS = -module -version-info 1:1:0 -L/usr/realtime-2.6.32.11-rtai-3.8.1/lib -lpthread -mhard-float \
+_m3rt_system_la_LDFLAGS = -module -version-info 1:1:0 -L$(RTAI_DIR)/lib -lpthread -mhard-float \
 	-L$(ros_dir)/ros/core/roscpp/lib \
 	-L$(ros_dir)/ros/core/roslib/lib \
 	-L$(ros_dir)/ros/core/rosconsole/lib \

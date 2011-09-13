@@ -104,9 +104,16 @@ PKG_CHECK_MODULES([PROTOBUF], [protobuf >= 2.2.0a])
 #------------------------------------------------------------------------------
 PKG_CHECK_MODULES([OROCOSKDL], [orocos-kdl >= 1.0.2])
 
+#TODO: have autoconf find correct rtai dir
+AC_SUBST(RTAI_DIR,[/usr/realtime-2.6.32.11-rtai-3.8.1])
+
+#TODO: have autoconf find correct ros dir
+AC_SUBST(ROS_DIR,[/opt/ros/cturtle/])
+
+#m3toolbox.pc
+
 AC_CONFIG_FILES([
 	m3base.pc
-	m3toolbox.pc
 	Makefile
 	python/Makefile
 	src/m3rt/base/Makefile

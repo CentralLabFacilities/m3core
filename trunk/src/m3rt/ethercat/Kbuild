@@ -14,6 +14,9 @@
 # 
 # You should have received a copy of the GNU Lesser General Public License
 # along with M3.  If not, see <http://www.gnu.org/licenses/>.
+
+#TODO: make the rtai dir chosen from autoconf
+
 EXTRA_CFLAGS := -I/usr/include/libethercat/ \
 		-I/usr/include/libethercat/master/ \
 		-I/usr/realtime-2.6.32.11-rtai-3.8.1/include \

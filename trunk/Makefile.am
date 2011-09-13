@@ -44,7 +44,7 @@ EXTRA_DIST = \
         configure
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = m3base.pc m3toolbox.pc
+pkgconfig_DATA = m3base.pc
 
 includedir =  /usr/local/include/m3_msgs
 
