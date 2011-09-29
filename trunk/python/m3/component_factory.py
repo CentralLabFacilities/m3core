@@ -9,6 +9,12 @@ import m3.monitor
 component_map={
     'm3monitor': m3.monitor.M3Monitor
     }
+    
+m3_product_codes={}
+
+m3_fpfx={}
+
+m3_eeprom_cfgs={}
 
 success = True
 

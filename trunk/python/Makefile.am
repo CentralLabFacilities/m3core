@@ -26,7 +26,8 @@ pkgpython_PYTHON = \
 	m3/gui.py\
 	m3/unit_conversion.py \
 	m3rt/component_base_pb2.py\
-	m3rt/m3rt_toolbox.py
+	m3rt/m3rt_toolbox.py\
+	m3rt/eeprom.py
 
 dist_bin_SCRIPTS = \
 	scripts/m3rt/m3rt_eeprom.py\
