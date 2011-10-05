@@ -42,10 +42,10 @@ bool M3ComponentFactory::ReadConfig(const char * filename)
 	YAML::Node doc;
 	GetYamlDoc(filename, doc);
 
-	for(unsigned i=0;i<doc.size();i++) 
+	for(unsigned i=0;i<doc["factory_rt_libs"].size();i++) 
 	{
  		string lib;
-    		doc[i] >> lib;
+    		doc["factory_rt_libs"][i] >> lib;
 		AddComponentLibrary(lib);
     	}
 
