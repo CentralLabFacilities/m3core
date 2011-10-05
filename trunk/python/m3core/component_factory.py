@@ -20,7 +20,7 @@ success = True
 
 try:
     #f=file('/home/meka/mekabot/m3sim-1.3/robot_config/m3_component_py.yml','r')
-    f=file(m3t.get_m3_config_path() + 'm3_component_py.yml','r')    
+    f=file(m3t.get_m3_config_path() + 'm3_config.yml','r')    
     config = yaml.safe_load(f.read())
     
 except (IOError, EOFError):
@@ -28,9 +28,11 @@ except (IOError, EOFError):
     success = False
 
 if success:
-    if config is not None:
-        for k in config:
+    if config['factory_py_libs'] is not None:
+        for k in config['factory_py_libs']:
             execfile(k)
+    else:
+	print 'WARNING: No Python factory libraries configured in m3_config.yml'
 
 def create_component(name):
     """This is a useful utility for creating components based
