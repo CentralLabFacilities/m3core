@@ -104,12 +104,11 @@ class M3Component{
 		virtual google::protobuf::Message *  GetStatus()=0;
 		virtual google::protobuf::Message *  GetParam()=0;
 		void ParseCommandTest(string & s){}
-		
+		virtual bool SerializeStatus(string & s);
 	protected:
 		void RegisterVersionID(const char * name, int id);
 		virtual bool ParseCommand(string & s);
-		virtual bool ParseParam(string & s);
-		virtual bool SerializeStatus(string & s);
+		virtual bool ParseParam(string & s);		
 		virtual bool LinkDependentComponents(){return true;}
 		virtual M3BaseStatus *  GetBaseStatus()=0;
 	protected:
