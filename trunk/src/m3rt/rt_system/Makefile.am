@@ -71,14 +71,27 @@ _m3rt_system_la_CPPFLAGS = \
 	-I$(ros_dir)/ros/core/rosconsole/include \
 	-I$(top_srcdir)/ros/m3_msgs/srv_gen/cpp/include \
 	-I$(top_srcdir)/ros/m3_msgs/msg_gen/cpp/include \
-	$(RT)
+	$(RT)\
+	-I$(ros_dir)/stacks/ros_comm/utilities/cpp_common/include \
+	-I$(ros_dir)/stacks/ros_comm/clients/cpp/roscpp_traits/include \
+	-I$(ros_dir)/stacks/ros_comm/clients/cpp/roscpp_serialization/include \
+	-I$(ros_dir)/stacks/ros_comm/clients/cpp/roscpp/include \
+	-I$(ros_dir)/stacks/ros_comm/tools/rosconsole/include \
+	-I$(ros_dir)/stacks/ros_comm/utilities/xmlrpcpp/src\
+	-I$(ros_dir)/stacks/ros_comm/utilities/rostime/include
 	
 _m3rt_system_la_LDFLAGS = -module -version-info 1:1:0 -L$(RTAI_DIR)/lib -lpthread -mhard-float \
 	-L$(ros_dir)/ros/core/roscpp/lib \
 	-L$(ros_dir)/ros/core/roslib/lib \
 	-L$(ros_dir)/ros/core/rosconsole/lib \
 	-L$(ros_dir)/ros/3rdparty/xmlrpcpp/lib \
-	-L$(top_srcdir)/src/m3rt/base
+	-L$(top_srcdir)/src/m3rt/base\
+	-L$(ros_dir)/stacks/ros_comm/utilities/cpp_common/lib \
+	-L$(ros_dir)/stacks/ros_comm/clients/cpp/roscpp_traits/lib \
+	-L$(ros_dir)/stacks/ros_comm/clients/cpp/roscpp_serialization/lib \
+	-L$(ros_dir)/stacks/ros_comm/clients/cpp/roscpp/lib \
+	-L$(ros_dir)/stacks/ros_comm/tools/rosconsole/lib \
+	-L$(ros_dir)/stacks/ros_comm/utilities/xmlrpcpp/lib
 
 _m3rt_system_la_LIBADD = $(PROTOBUF_LIBS) $(YAMLCPP_LIBS) $(LRT) -lm3base -lXmlRpc -lros -lroslib
 
