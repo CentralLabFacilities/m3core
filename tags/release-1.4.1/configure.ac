@@ -108,7 +108,8 @@ PKG_CHECK_MODULES([OROCOSKDL], [orocos-kdl >= 1.0.2])
 AC_SUBST(RTAI_DIR,[/usr/realtime-2.6.32.11-rtai-3.8.1])
 
 #TODO: have autoconf find correct ros dir
-AC_SUBST(ROS_DIR,[/opt/ros/cturtle/])
+# AC_SUBST(ROS_DIR,[/opt/ros/cturtle/])
+AC_SUBST(ROS_DIR,[/opt/ros/diamondback/])
 
 #m3toolbox.pc
 
