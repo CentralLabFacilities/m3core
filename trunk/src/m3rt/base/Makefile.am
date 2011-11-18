@@ -53,15 +53,26 @@ libm3baseinclude_HEADERS = \
 	m3rt_def.h \
 	m3ec_def.h
 
+
+if RTAI
 libm3base_la_SOURCES = \
 	component_base.pb.cpp\
 	toolbox.cpp \
 	simple_server.cpp \
 	component_factory.cpp \
 	component_ec.cpp \
-	component.cpp \
+	component.cpp 	\
 	component_async.cpp\
 	component_shm.cpp
+else
+libm3base_la_SOURCES = \
+	component_base.pb.cpp\
+	toolbox.cpp \
+	simple_server.cpp \
+	component_factory.cpp \
+	component_ec.cpp \
+	component.cpp
+endif
 	
 lib_LTLIBRARIES = libm3base.la 
 
