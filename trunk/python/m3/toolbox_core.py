@@ -173,7 +173,18 @@ def get_config_hostname():
         f=file(filename,'r')
         config= yaml.safe_load(f.read())
         f.close()
-        return config['hostname']
+        try:
+                h = config['hostname']
+        except KeyError:
+                h = None
+        return h
+
+
+def get_local_hostname():
+	cmd='hostname'
+	stdout_handle = os.popen(cmd, "r")
+	s = stdout_handle.read()
+	return s[:-1]
 
 
 def get_component_config(name):

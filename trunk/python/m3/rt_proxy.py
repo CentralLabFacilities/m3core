@@ -25,6 +25,7 @@ import time
 import os
 
 
+
 class M3RtProxy:
 	def __init__(self,host=None,rpc_port=8000):
 		"""M3RtProxy is the client interface to the M3RtServer.
@@ -36,6 +37,8 @@ class M3RtProxy:
 		self.host=host
 		if host is None:
 			self.host=m3t.get_config_hostname()
+		if self.host is None:
+			self.host = m3t.get_local_hostname()
 		self.rpc_port=rpc_port
 		self.data_port=10000 #Currently hardcoded in M3
 		self.proxy=None

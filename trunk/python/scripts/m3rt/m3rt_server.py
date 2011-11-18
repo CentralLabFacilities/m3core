@@ -66,11 +66,6 @@ def get_log_file(logfilename):
 def get_log_info(logname,logpath=None):
 	return m3t.get_log_info(logname,logpath)
 
-def get_hostname():
-	cmd='hostname'
-	stdout_handle = os.popen(cmd, "r")
-	s = stdout_handle.read()
-	return s[:-1]
 
 class client_thread(Thread):
 	def __init__ (self):
@@ -88,7 +83,7 @@ class client_thread(Thread):
 			pass
 
 # ################################################################################
-host=get_hostname()
+host = m3t.get_local_hostname()
 port=8000
 make_op_all = False
 start_ros_svc = False
