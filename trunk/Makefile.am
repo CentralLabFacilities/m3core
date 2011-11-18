@@ -24,11 +24,16 @@ AM_CPPFLAGS = -g
 
 #ros/m3_msgs 
 
+if RTAI
 SUBDIRS = src/m3rt/base \
-	src/m3rt/ethercat \
+	src/m3rt/rt_system \
+	python \
+	src/m3rt/ethercat 
+else
+SUBDIRS = src/m3rt/base \
 	src/m3rt/rt_system \
 	python
-
+endif
 
 
 dist_bin_SCRIPTS = \

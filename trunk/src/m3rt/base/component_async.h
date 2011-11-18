@@ -21,9 +21,12 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 #define M3_COMPONENT_ASYNC_H
 
 #include "m3rt/base/component.h"
+#include <google/protobuf/message.h>
+
+#ifdef __RTAI__	
 #include <rtai.h>
 #include "rtai_sem.h"
-#include <google/protobuf/message.h>
+#endif
 
 
 // Class to inherit from for async communications within M3
@@ -50,9 +53,11 @@ class M3ComponentAsync : public M3Component
 		void SignalStop(){stop_thread = true;}
 		bool IsInitializing(){return initializing;}
 		
+#ifdef __RTAI__			
 		SEM * cmd_mutex;
 	        SEM * status_mutex;
-		
+#endif
+
 		virtual google::protobuf::Message *  GetCommandAsync()=0;
 		virtual google::protobuf::Message *  GetStatusAsync()=0;
 		virtual google::protobuf::Message *  GetParamAsync()=0;

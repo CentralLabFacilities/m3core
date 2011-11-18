@@ -28,6 +28,8 @@ namespace m3rt{
 using namespace std;
 
 
+#ifdef __RTAI__
+
 ///////////////////////////////////////////////////////
 
 void *async_io_thread(void * arg)
@@ -194,5 +196,6 @@ void M3ComponentAsync::StepCommand()
   
 }
 
+#endif
 
 }

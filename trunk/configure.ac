@@ -82,7 +82,17 @@ AC_MSG_RESULT([$LINUX_SOURCE_DIR (Kernel $linuxversion)])
 #------------------------------------------------------------------------------
 # Ethercat
 #------------------------------------------------------------------------------
-PKG_CHECK_MODULES([ETHERCAT], [ethercat >= 1.5.0])
+
+#if test "$rtai" = true; then
+#    PKG_CHECK_MODULES([ETHERCAT], [ethercat >= 1.5.0])
+#fi
+
+#PKG_CHECK_MODULES([ETHERCAT], [ethercat >= 1.5.0])
+
+AS_IF(["$rtai" = true], [
+   PKG_CHECK_MODULES([ETHERCAT], [ethercat >= 1.5.0])
+])
+
 
 #------------------------------------------------------------------------------
 # Eigen
