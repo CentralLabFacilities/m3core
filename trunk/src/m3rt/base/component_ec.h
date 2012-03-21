@@ -47,6 +47,11 @@ class M3ComponentEc: public M3Component{
 		virtual M3EtherCATStatus * GetEcStatus()=0;
 		virtual void SetStatusFromPdo(unsigned char * data)=0;
 		virtual void SetPdoFromCommand(unsigned char * data)=0;
+		
+		//Override these to pump virtual hardware data through the system
+		virtual void SetStatusFromPdoVirtual(){};
+		virtual void SetPdoFromCommandVirtual(){};
+		
 		bool SetSlaveEcShm(M3EcSlaveShm * slaves, int slaves_responding);
 		virtual bool ReadConfig(const char * filename);
 		void RegisterPdo(const char * name, int id){pdo_names.push_back(name);pdo_ids.push_back(id);} 

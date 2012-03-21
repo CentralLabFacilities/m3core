@@ -109,11 +109,11 @@ void  M3ComponentEc::StepStatus()
     M3EtherCATStatus * status = GetEcStatus();
     if (virtual_mode)
     {
-	SetStatusFromPdo(NULL);
 	status->set_online(1);
 	status->set_operational(1);
 	status->set_al_state(8);
 	status->set_active(1);
+	SetStatusFromPdoVirtual(); 
     }
     else
     {
@@ -139,7 +139,7 @@ void  M3ComponentEc::StepCommand()
 {
   if (virtual_mode)
   {
-    SetPdoFromCommand(NULL);//Component must be careful to do the right thing with NULL ptr
+    SetPdoFromCommandVirtual();
   }
   else
   {
