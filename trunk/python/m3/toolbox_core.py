@@ -306,17 +306,21 @@ def GetIdMapDictFromMsg(msg=None,d=None,idx=0,root=''):
         return map
 
 #return a list: ['a','b','c.d',...]
-def get_msg_fields(msg,prefix=''):
+#exclude ['fielda','fieldb',...] : exclude certain fields
+def get_msg_fields(msg,prefix='',exclude=None):
         ret=[]
         fields=msg.DESCRIPTOR.fields_by_name.keys()
         for f in fields:
-                v=getattr(msg,f)
-                if type(v)==long or type(v)==float or type(v)==int or type(v)==bool or type(v)==str or hasattr(v,'__len__'):
-                        ret.append(prefix+f)
-                elif hasattr(v,'__class__'):
-                        ret=ret+get_msg_fields(v,f+'.')
+		if exclude==None or len([x for x in exclude if f.find(x)>=0])==0:
+			v=getattr(msg,f)
+			if type(v)==long or type(v)==float or type(v)==int or type(v)==bool or type(v)==str or hasattr(v,'__len__'):
+				ret.append(prefix+f)
+			elif hasattr(v,'__class__'):
+				ret=ret+get_msg_fields(v,f+'.',exclude)
         return ret
 
+
+	
 def user_select_msg_field(msg):
         name=''
         fields=msg.DESCRIPTOR.fields_by_name.keys()
