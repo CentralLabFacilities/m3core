@@ -316,9 +316,8 @@ def get_msg_fields(msg,prefix='',exclude=None):
 			if type(v)==long or type(v)==float or type(v)==int or type(v)==bool or type(v)==str or hasattr(v,'__len__'):
 				ret.append(prefix+f)
 			elif hasattr(v,'__class__'):
-				ret=ret+get_msg_fields(v,f+'.',exclude)
-        return ret
-
+				ret=ret+get_msg_fields(v,prefix+f+'.',exclude)
+	return ret
 
 	
 def user_select_msg_field(msg):
