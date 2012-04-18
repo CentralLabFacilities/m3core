@@ -27,15 +27,16 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 typedef double mReal;
 
 /* ------ Priorities for RT thread Step ordering ---------------------*/
-#define MAX_PRIORITY 7
+#define MAX_PRIORITY 8
 #define EC_PRIORITY 0
 #define CALIB_PRIORITY 1
-#define JOINT_PRIORITY 2
-#define CHAIN_PRIORITY 3
-#define DYNAMATICS_PRIORITY 4
-#define ROBOT_PRIORITY 5
-#define ROBOT_CTRL_PRIORITY 6
-#define ARM_HEAD_DYNAMATICS_PRIORITY 7
+#define CONTROL_PRIORITY 2
+#define JOINT_PRIORITY 3
+#define CHAIN_PRIORITY 4
+#define DYNAMATICS_PRIORITY 5
+#define ROBOT_PRIORITY 6
+#define ROBOT_CTRL_PRIORITY 7
+#define ARM_HEAD_DYNAMATICS_PRIORITY 8
 
 /*-------------------- RTAI AND ETHERCAT ----------------------------*/
 
