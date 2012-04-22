@@ -137,7 +137,7 @@ void * rt_system_thread(void * arg)
 		      m3sys->over_step_cnt--;
 		}
 		
-		rt_task_wait_period();
+		//rt_task_wait_period(); //No longer need as using sync semaphore of m3ec.ko
 #else		
 		end = getNanoSec();
 		dt=end-start;

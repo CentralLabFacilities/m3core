@@ -50,7 +50,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define M3_ERR(fmt, args...) printk(KERN_ERR "M3 ERROR: " fmt, ##args)
 #define M3_WARN(fmt, args...) printk(KERN_WARNING "M3 WARNING: " fmt, ##args)
 
-#define USE_DISTRIBUTED_CLOCKS //Version 1.0 and newer
+//#define USE_DISTRIBUTED_CLOCKS //Version 1.0 and newer
 
 
 
@@ -214,7 +214,7 @@ void run(long shm)
 	M3_INFO("EtherCAT kernel loop starting...\n");
 #ifdef USE_DISTRIBUTED_CLOCKS
 	struct timeval tv;
-	unsigned int sync_ref_counter = 0;	
+	unsigned int _ref_counter = 0;	
 	count2timeval(nano2count(rt_get_real_time_ns()), &tv);
 #endif
 	sys.shm->counter=0;
@@ -226,7 +226,7 @@ void run(long shm)
 		ts0=rt_get_time_ns();
 		rt_sem_wait(&master_sem);
 		ts1=rt_get_time_ns();
-		ecrt_master_receive(sys.master);
+		ecrt_master_receive(sys.master); //Get Status data
 		ecrt_domain_process(sys.domain[sys.domain_idx]);
 		rt_sem_signal(&master_sem);
 		ts2=rt_get_time_ns();
