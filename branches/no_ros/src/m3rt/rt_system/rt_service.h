@@ -40,7 +40,7 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 	
 class M3RtService{
 public:
-	M3RtService():rt_system(NULL),ros_service(NULL),log_service(NULL),svc_task(NULL),next_port(10000),num_rtsys_attach(0){factory.Startup();}
+	M3RtService():rt_system(NULL),log_service(NULL),svc_task(NULL),next_port(10000),num_rtsys_attach(0){factory.Startup();}
 	~M3RtService();
 	bool Startup();
 	void Shutdown();
@@ -49,17 +49,14 @@ public:
 	bool IsRtSystemOperational(){if (rt_system==NULL) return false; return rt_system->IsOperational();}
 	bool SetComponentStateSafeOp(char * name);
 	bool SetComponentStateOp(char * name);
-	int AttachDataService();
-	bool AttachRosService();
-	bool RemoveRosService();
+	int AttachDataService();	
 	bool RemoveDataService(int port);
 	bool AttachLogService(char * name, char * path, double freq,int page_size,int verbose);
 	//bool AddRosComponent(const char * name);
 	bool AddLogComponent(char * name){log_components.push_back(name);}
 	bool RemoveLogService();
 	bool IsDataServiceRunning();
-	bool IsLogServiceRunning(){return log_service!=NULL;}
-	bool IsRosServiceRunning(){return ros_service!=NULL;}
+	bool IsLogServiceRunning(){return log_service!=NULL;}	
 	bool IsRtSystemRunning(){return rt_system !=NULL;}
 	int GetNumComponents();
 	const char *  GetComponentName(int idx);
@@ -75,8 +72,7 @@ private:
 	m3rt::M3RtSystem  * rt_system;
 	m3rt::M3ComponentFactory factory; //Can only create one instance of this.
 	std::vector<m3rt::M3RtDataService*> data_services;
-	m3rt::M3RtLogService *log_service;
-	m3rt::M3RtRosService *ros_service;
+	m3rt::M3RtLogService *log_service;	
 	std::vector<std::string> log_components;
 #ifdef __RTAI__
 	RT_TASK *svc_task;

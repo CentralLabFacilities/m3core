@@ -27,10 +27,6 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 #include "yaml-cpp/yaml.h"
 #include <iostream>
 #include <m3rt/base/toolbox.h>
-#include "m3_msgs/M3ComponentCmd.h"
-#include "m3_msgs/M3ComponentStatus.h"
-#include "m3_msgs/M3ComponentParam.h"
-#include "m3_msgs/M3BaseStatus.h"
 
 namespace m3rt
 {
@@ -85,15 +81,7 @@ class M3Component{
 		virtual void StepStatus()=0;
 		virtual void StepCommand()=0;
 		
-		virtual ros::ServiceServer RosInitCmd(ros::NodeHandle * node_handle);
-		virtual ros::ServiceServer RosInitStatus(ros::NodeHandle * node_handle);
-		virtual ros::ServiceServer RosInitParam(ros::NodeHandle * node_handle);
-		virtual ros::Publisher RosInitPublish(ros::NodeHandle * node_handle);
-		virtual bool RosCallbackCmd(m3_msgs::M3ComponentCmd::Request  &req, m3_msgs::M3ComponentCmd::Response &res){return true;}
-		virtual bool RosCallbackStatus(m3_msgs::M3ComponentStatus::Request  &req, m3_msgs::M3ComponentStatus::Response &res){return true;}
-		virtual bool RosCallbackParam(m3_msgs::M3ComponentParam::Request  &req, m3_msgs::M3ComponentParam::Response &res){return true;}
-		virtual bool RosPublish(ros::Publisher * pub){return true;};
-		virtual bool RosExportParam(ros::NodeHandle * node_handle) {return true;};
+		
 
 		void SetTimestamp(int64_t ts){GetBaseStatus()->set_timestamp(ts);}
 		void GetTimestamp(int64_t ts){GetBaseStatus()->timestamp();}

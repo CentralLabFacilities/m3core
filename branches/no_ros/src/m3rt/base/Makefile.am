@@ -76,7 +76,7 @@ endif
 	
 lib_LTLIBRARIES = libm3base.la 
 
-libm3base_la_LIBADD = -lXmlRpc -lros -lroslib \
+libm3base_la_LIBADD =  \
 	$(PROTOBUF_LIBS) \
 	$(YAMLCPP_LIBS) \
 	$(LRT) 

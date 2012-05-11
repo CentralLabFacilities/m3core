@@ -28,7 +28,6 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 #include "m3rt/base/component_factory.h"
 #include "m3rt/base/component_base.pb.h" 
 #include "m3rt/rt_system/rt_log_service.h"
-#include "m3rt/rt_system/rt_ros_service.h"
 #include <string>
 #include <vector>
 
@@ -80,7 +79,6 @@ public:
 #endif
 	void SetFactory(M3ComponentFactory * f){factory=f;}
 	void AttachLogService(M3RtLogService * l){log_service=l;}
-	void AttachRosService(M3RtRosService * r){ros_service=r;}
 	void RemoveLogService(){log_service=NULL;M3_DEBUG("Log service stopped at %d\n",log_service);}
 	bool ParseCommandFromExt(M3CommandAll & msg);  //Must be thread safe
 	bool SerializeStatusToExt(M3StatusAll & msg, vector<string>& names); //Must be thread safe
@@ -114,7 +112,6 @@ private:
 	long long last_cycle_time;
 #endif
 	M3RtLogService * log_service;
-	M3RtRosService * ros_service;
 	vector<int> idx_map_ec;
 	vector<int> idx_map_rt;
 	long hst;

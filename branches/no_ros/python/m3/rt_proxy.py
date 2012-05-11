@@ -87,8 +87,8 @@ class M3RtProxy:
 		if start_data_svc:
 			self.__start_data_service()
 
-		if start_ros_svc:
-			self.__start_ros_service()
+		#if start_ros_svc:
+		#	self.__start_ros_service()
 
 	def stop(self, force_safeop=True):
 		"""Stop the RtSystem and any running data service on the server. 
@@ -99,8 +99,8 @@ class M3RtProxy:
 		try:
 			if self.data_svc is not None:
 				self.__stop_data_service()
-			if self.ros_svc is not None:
-				self.__stop_ros_service()
+			#if self.ros_svc is not None:
+			#	self.__stop_ros_service()
 			if self.proxy is not None:
 				#if not self.proxy.IsDataServiceRunning():
 				self.proxy.RemoveRtSystem()
@@ -487,6 +487,6 @@ class M3RtProxy:
 			raise m3t.M3Exception('M3RtProxy not started')
 		self.proxy.AttachRosService()
 
-	def __stop_ros_service(self):
-		if self.proxy is not None:
-			self.proxy.RemoveRosService()
+	#def __stop_ros_service(self):
+	#	if self.proxy is not None:
+	#		self.proxy.RemoveRosService()

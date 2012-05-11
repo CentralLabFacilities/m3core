@@ -26,9 +26,6 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 #include "yaml-cpp/yaml.h"
 #include <iostream>
 #include <fstream>
-#include "ros/ros.h"
-
-#include "m3_msgs/M3BaseStatus.h"
 
 namespace m3rt
 {
