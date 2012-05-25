@@ -73,7 +73,7 @@ void * rt_system_thread(void * arg)
 	rt_allow_nonroot_hrt();
 	rt_task_use_fpu(task, 1);
 	mlockall(MCL_CURRENT | MCL_FUTURE);
-	RTIME tick_period = nano2count(RT_TIMER_TICKS_NS); 
+	RTIME tick_period = nano2count(RT_TIMER_TICKS_NS + 200000); 
 	RTIME now = rt_get_time();
 	if (1)
 		rt_make_hard_real_time();
