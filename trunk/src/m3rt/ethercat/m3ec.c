@@ -195,6 +195,7 @@ void run(long shm)
 {
 	static unsigned counter=0;
 	int sidx,i;
+	int rt_downsample = 0; // only signal rt server every 3 cycles
 	M3EcSlaveShm * s;
 	RTIME tstart;
 	RTIME t_ecat_wait_rx;
@@ -261,9 +262,14 @@ void run(long shm)
 	
 		rt_sem_signal(&shm_sem);
 		if (sys.domain_idx%NUM_EC_DOMAIN==0)
-		{
+		{		      
 			sys.shm->counter++;
-			rt_sem_signal(&sync_sem);
+			rt_downsample++; 
+			if (rt_downsample == 3)
+			{
+			  rt_sem_signal(&sync_sem);
+			  rt_downsample = 0;
+			}
 		}
 		ts4=rt_get_time_ns();
 	//Send data out
