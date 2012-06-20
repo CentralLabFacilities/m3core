@@ -42,8 +42,7 @@ class M3Proc:
                 print 'Available components:', cnames
                 
 		self.names=m3t.user_select_components_interactive(cnames)
-		if len(self.names)==0:
-			return
+		
 		self.components=[]
 		for name in self.names:
 			self.components.append(m3f.create_component(name))
