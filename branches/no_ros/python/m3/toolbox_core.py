@@ -32,8 +32,8 @@ from datetime import timedelta
 from m3.unit_conversion import *
 from threading import Thread
 import m3.component_base_pb2 as mbs
-import rospy
-import rosbag
+#import rospy
+#import rosbag
 
 # ###########################################
 
