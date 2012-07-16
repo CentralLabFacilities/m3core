@@ -73,7 +73,7 @@ void * rt_system_thread(void * arg)
 	rt_allow_nonroot_hrt();
 	rt_task_use_fpu(task, 1);
 	mlockall(MCL_CURRENT | MCL_FUTURE);
-	RTIME tick_period = nano2count(RT_TIMER_TICKS_NS); 
+	RTIME tick_period = nano2count(RT_TIMER_TICKS_NS + 200000); 
 	RTIME now = rt_get_time();
 	if (1)
 		rt_make_hard_real_time();
@@ -137,7 +137,7 @@ void * rt_system_thread(void * arg)
 		      m3sys->over_step_cnt--;
 		}
 		
-		rt_task_wait_period(); //No longer need as using sync semaphore of m3ec.ko
+		//rt_task_wait_period(); //No longer need as using sync semaphore of m3ec.ko
 #else		
 		end = getNanoSec();
 		dt=end-start;

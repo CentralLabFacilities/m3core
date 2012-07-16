@@ -43,7 +43,7 @@ typedef double mReal;
 #define LOG_FILE "/robot_log/m3rt_server.log"
 // RTAI task characteristics
 #define RT_TASK_FREQUENCY 1000		//Frequency of rt-task (HZ) (1000)
-#define RT_KMOD_FREQUENCY 1000		//Frequency of rt kernel module (HZ) (3000)
+#define RT_KMOD_FREQUENCY 2000		//Frequency of rt kernel module (HZ) (3000)
 #define RT_INHIBIT_TIME 20
 #define RT_TIMER_TICKS_NS (1000000000 / RT_TASK_FREQUENCY)		//Period of rt-timer (ns) (=500us)	
 #define RT_KMOD_TIMER_TICKS_NS (1000000000 / RT_KMOD_FREQUENCY)		//Period of kernel module rt-timer (ns) (=500us)				
