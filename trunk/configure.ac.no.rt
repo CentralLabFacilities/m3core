@@ -111,10 +111,7 @@ AC_SUBST(ROS_DIR,[/opt/ros/cturtle/])
 AC_CONFIG_FILES([
 	m3base.pc
 	Makefile
-	python/Makefile
-	src/m3rt/base/Makefile
-	src/m3rt/ethercat/Makefile
-	src/m3rt/rt_system/Makefile
+	python/Makefile	
 ])
 AC_OUTPUT
 
