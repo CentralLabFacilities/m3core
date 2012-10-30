@@ -18,8 +18,11 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
+
 #ifndef M3EC_H
 #define M3EC_H
+
+#include "m3rt_def.h"
 
 #ifdef __KERNEL__
 #define int16_t short
@@ -90,6 +93,8 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 //Causes downsample too bus by this factor
 //#define NUM_EC_DOMAIN 3  //Works for ISS full humanoid
 #define NUM_EC_DOMAIN 1  //Works for ISS full humanoid
+#define NUM_EC_CYCLES_PER_RT 3
+#define RT_KMOD_FREQUENCY (RT_TASK_FREQUENCY*NUM_EC_CYCLES_PER_RT*NUM_EC_DOMAIN)	//Frequency of rt kernel module (HZ) (3000)
 //Todo: With NUM_EC_DOMAIN=1, not all in RBL bot get processed
 // With NUM_EC_DOMAIN=2, last in chain (MH3) doesn't get prcoessed if m3rt_bus_init port3
 // With NUM_EC_DOMAIN=3, works. Need to figure out why customized per # in chain...

@@ -265,7 +265,7 @@ void run(long shm)
 		{		      
 			sys.shm->counter++;
 			rt_downsample++; 
-			if (rt_downsample == 3)
+			if (rt_downsample == NUM_EC_CYCLES_PER_RT)
 			{
 			  rt_sem_signal(&sync_sem);
 			  rt_downsample = 0;
