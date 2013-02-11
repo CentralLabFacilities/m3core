@@ -12,7 +12,8 @@ AC_PROG_LIBTOOL
 # SWIG
 #------------------------------------------------------------------------------
 AM_PATH_PYTHON(2.3)
-AC_PROG_SWIG(1.3.21)
+#AC_PROG_SWIG(1.3.21)
+AC_PROG_SWIG(2.0)
 SWIG_ENABLE_CXX
 SWIG_PYTHON
 
@@ -89,9 +90,9 @@ AC_MSG_RESULT([$LINUX_SOURCE_DIR (Kernel $linuxversion)])
 
 #PKG_CHECK_MODULES([ETHERCAT], [ethercat >= 1.5.0])
 
-AS_IF(["$rtai" = true], [
-   PKG_CHECK_MODULES([ETHERCAT], [ethercat >= 1.5.0])
-])
+#AS_IF(["$rtai" = true], [
+#   PKG_CHECK_MODULES([ETHERCAT], [ethercat >= 1.5.0])
+#])
 
 
 #------------------------------------------------------------------------------
@@ -115,7 +116,8 @@ PKG_CHECK_MODULES([PROTOBUF], [protobuf >= 2.2.0a])
 PKG_CHECK_MODULES([OROCOSKDL], [orocos-kdl >= 1.0.2])
 
 #TODO: have autoconf find correct rtai dir
-AC_SUBST(RTAI_DIR,[/usr/realtime-2.6.32.11-rtai-3.8.1])
+#AC_SUBST(RTAI_DIR,[/usr/realtime-2.6.32.11-rtai-3.8.1])
+AC_SUBST(RTAI_DIR,[/usr/realtime])
 
 #TODO: have autoconf find correct ros dir
 AC_SUBST(ROS_DIR,[/opt/ros/cturtle/])

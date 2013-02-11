@@ -17,9 +17,9 @@
 
 #TODO: make the rtai dir chosen from autoconf
 
-EXTRA_CFLAGS := -I/usr/include/libethercat/ \
-		-I/usr/include/libethercat/master/ \
-		-I/usr/realtime-2.6.32.11-rtai-3.8.1/include \
+EXTRA_CFLAGS := -I/opt/etherlab/include/ \
+		-I/usr/local/src/ethercat/master/ \
+		-I/usr/realtime/include \
 		-D__IN_RTAI__ -ffast-math 
 obj-m := m3ec.o
 

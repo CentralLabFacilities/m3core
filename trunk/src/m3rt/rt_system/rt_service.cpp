@@ -358,52 +358,13 @@ bool M3RtService::PrettyPrintRtSystem()
 
 bool M3RtService::AttachRosService()
 {
-	if (rt_system==NULL)
-		return false;
-	if (IsRosServiceRunning())
-	{
-	    ros_service->AddClient();
-	    return true;
-	}
-	  
-	m3rt::M3_INFO("Attaching M3RtRosService.\n");
-
-	if (rt_system==NULL || IsRosServiceRunning())
-		return false;
-	ros_service = new m3rt::M3RtRosService(rt_system);
-// 	for(int i=0;i<log_components.size();i++)
-// 		log_service->AddComponent(log_components[i]);
-	if (!ros_service->Startup())
-	{
-		m3rt::M3_INFO("M3RtRosService failed to start\n");
-		ros_service->Shutdown();
-		delete ros_service;
-		ros_service=NULL;
-		//log_components.clear();
-		m3rt::M3_INFO("Shutting down RTSystem due to RtRosService startup failure\n");
-		RemoveRtSystem();
-		return false;
-	}
-
-	rt_system->AttachRosService(ros_service);
-	ros_service->AddClient();
+	
 	return true;
 }
 
 bool M3RtService::RemoveRosService()
 {
-	if (!ros_service)
-	  return true;
-  
-	ros_service->RemoveClient();
-	if (ros_service->GetNumClients() > 0)
-	    return true;
-		
-	ros_service->Shutdown();
-	delete ros_service;
-	ros_service=NULL;
 	return true;
-
 }
 
 

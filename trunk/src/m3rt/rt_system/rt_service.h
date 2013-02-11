@@ -40,7 +40,7 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 	
 class M3RtService{
 public:
-	M3RtService():rt_system(NULL),ros_service(NULL),log_service(NULL),svc_task(NULL),next_port(10000),num_rtsys_attach(0){factory.Startup();}
+	M3RtService():rt_system(NULL),log_service(NULL),svc_task(NULL),next_port(10000),num_rtsys_attach(0){factory.Startup();}
 	~M3RtService();
 	bool Startup();
 	void Shutdown();
@@ -59,7 +59,7 @@ public:
 	bool RemoveLogService();
 	bool IsDataServiceRunning();
 	bool IsLogServiceRunning(){return log_service!=NULL;}
-	bool IsRosServiceRunning(){return ros_service!=NULL;}
+	bool IsRosServiceRunning(){return false;}
 	bool IsRtSystemRunning(){return rt_system !=NULL;}
 	int GetNumComponents();
 	const char *  GetComponentName(int idx);
@@ -76,7 +76,6 @@ private:
 	m3rt::M3ComponentFactory factory; //Can only create one instance of this.
 	std::vector<m3rt::M3RtDataService*> data_services;
 	m3rt::M3RtLogService *log_service;
-	m3rt::M3RtRosService *ros_service;
 	std::vector<std::string> log_components;
 #ifdef __RTAI__
 	RT_TASK *svc_task;

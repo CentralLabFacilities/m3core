@@ -43,7 +43,6 @@ _m3rt_system_la_SOURCES = \
 	rt_system.cpp \
 	rt_data_service.cpp \
 	rt_log_service.cpp\
-	rt_ros_service.cpp\
 	m3rt_system_wrap.cpp \
 	m3rt_system.i 
 
@@ -93,7 +92,7 @@ _m3rt_system_la_LDFLAGS = -module -version-info 1:1:0 -L$(RTAI_DIR)/lib -lpthrea
 	-L$(ros_dir)/stacks/ros_comm/tools/rosconsole/lib \
 	-L$(ros_dir)/stacks/ros_comm/utilities/xmlrpcpp/lib
 
-_m3rt_system_la_LIBADD = $(PROTOBUF_LIBS) $(YAMLCPP_LIBS) $(LRT) -lm3base -lXmlRpc -lros -lroslib
+_m3rt_system_la_LIBADD = $(PROTOBUF_LIBS) $(YAMLCPP_LIBS) $(LRT) -lm3base 
 
 m3rt_system_wrap.cpp : m3rt_system.i
 	$(SWIG) $(SWIG_PYTHON_OPT) -I$(m3_dir)  -o $@ $<

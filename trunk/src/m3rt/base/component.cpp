@@ -22,29 +22,6 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 namespace m3rt
 {
 
-ros::ServiceServer M3Component::RosInitCmd(ros::NodeHandle * node_handle)
-{
-   M3_WARN("No ROS Service available for %s\n", GetName().c_str());
-   return node_handle->advertiseService(GetName()+"_cmd",&M3Component::RosCallbackCmd, this);
-}
-
-ros::ServiceServer M3Component::RosInitStatus(ros::NodeHandle * node_handle)
-{
-   M3_WARN("No ROS Service available for %s\n", GetName().c_str());
-   return node_handle->advertiseService(GetName()+"_status",&M3Component::RosCallbackStatus, this);
-}
-
-ros::ServiceServer M3Component::RosInitParam(ros::NodeHandle * node_handle)
-{
-   M3_WARN("No ROS Service available for %s\n", GetName().c_str());
-   return node_handle->advertiseService(GetName()+"_param",&M3Component::RosCallbackParam, this);
-}
-
-ros::Publisher M3Component::RosInitPublish(ros::NodeHandle * node_handle)
-{
-   M3_WARN("No ROS Service available for %s\n", GetName().c_str());
-   return node_handle->advertise<m3_msgs::M3BaseStatus>(GetName(), 1000);
-}
 
 bool M3Component::ParseCommand(std::string & s)
 {
