@@ -12,8 +12,8 @@ AC_PROG_LIBTOOL
 # SWIG
 #------------------------------------------------------------------------------
 AM_PATH_PYTHON(2.3)
-#AC_PROG_SWIG(1.3.21)
-AC_PROG_SWIG(2.0)
+AC_PROG_SWIG(1.3.21)
+#AC_PROG_SWIG(2.0)
 SWIG_ENABLE_CXX
 SWIG_PYTHON
 
