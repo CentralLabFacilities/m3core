@@ -25,7 +25,6 @@ import time
 import m3.rt_proxy as m3p
 import m3.toolbox_core as m3t
 import m3.component_factory as m3f
-
 import math
 
 class M3Proc:
@@ -45,7 +44,7 @@ class M3Proc:
 		
 		self.components=[]
 		for name in self.names:
-			self.components.append(m3f.create_component(name))
+			self.components.append(m3f.create_component(name))			
 			self.proxy.subscribe_status(self.components[-1])
 			self.proxy.publish_command(self.components[-1]) 
 			self.proxy.publish_param(self.components[-1]) 

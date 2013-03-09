@@ -41,6 +41,7 @@ dist_bin_SCRIPTS = \
 	scripts/m3rt_server_run \
 	scripts/m3rt_server_kill \
 	scripts/m3rt_server_debug \
+	scripts/disable_ros \
 	scripts/lsec scripts/m3rt_insmods \
 	scripts/m3rt_rmmods	
 
