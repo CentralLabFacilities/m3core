@@ -92,7 +92,7 @@ along with M3.  If not, see <http://www.gnu.org/licenses/>.
 /*****************************************************************************/
 //Causes downsample too bus by this factor
 //#define NUM_EC_DOMAIN 3  //Works for ISS full humanoid
-#define NUM_EC_DOMAIN 1  //Works for ISS full humanoid
+#define NUM_EC_DOMAIN 2  //Works for ISS full humanoid
 
 //Todo: With NUM_EC_DOMAIN=1, not all in RBL bot get processed
 // With NUM_EC_DOMAIN=2, last in chain (MH3) doesn't get prcoessed if m3rt_bus_init port3

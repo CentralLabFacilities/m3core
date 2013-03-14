@@ -63,6 +63,7 @@ void * rt_system_thread(void * arg)
 #ifdef __RTAI__	
 	RT_TASK *task;
 	RTIME start, end, dt;
+	M3_INFO("Beginning RTAI Initialization.\n");
 	task = rt_task_init_schmod(nam2num("M3SYS"), 0, 0, 0, SCHED_FIFO, 0xFF);
 	if (task==NULL)
 	{
@@ -70,29 +71,36 @@ void * rt_system_thread(void * arg)
 		sys_thread_active=false;
 		return 0;
 	}
+	M3_INFO("RT Task Scheduled.\n");
 	rt_allow_nonroot_hrt();
+	M3_INFO("Nonroot hrt initialized.\n");
 	rt_task_use_fpu(task, 1);
+	M3_INFO("Use fpu initialized.\n");
 	mlockall(MCL_CURRENT | MCL_FUTURE);
+	M3_INFO("Mem lock all initialized.\n");
 	RTIME tick_period = nano2count(RT_TIMER_TICKS_NS + 200000); 
 	RTIME now = rt_get_time();
 	if (1)
 		rt_make_hard_real_time();
+
 	if (0)
 	{
 		rt_make_soft_real_time();
 		M3_INFO("M3Sytem running in soft real time! For debugging only!!!\n");
 	}
+	M3_INFO("Hard real time initialized.\n");
 #else	
 	long long start, end, dt;	
 #endif	
 	sys_thread_active=true;
 	//Give other threads a chance to load before starting
 #ifdef __RTAI__
-	rt_sleep(nano2count(500000000));
+	rt_sleep(nano2count(1000000000));
 	rt_task_make_periodic(task, now + tick_period, tick_period); 
 #else	
 	usleep(50000);
 #endif
+	M3_INFO("Periodic task initialized.\n");
 	bool safeop_only = false;
 	
 	int tmp_cnt = 0;
@@ -105,12 +113,13 @@ void * rt_system_thread(void * arg)
 #else		
 		start = getNanoSec();
 #endif
-		
+
 		if (!m3sys->Step(safeop_only)) //This waits on m3ec.ko semaphore for timing
 			break;
 #ifdef __RTAI__
 		end = nano2count(rt_get_cpu_time_ns());
 		dt=end-start;
+
 		//if (tmp_cnt++ == 1000)
 		//{
 		 // M3_INFO("%f\n",double(count2nano(dt)/1000));

@@ -71,6 +71,7 @@ class client_thread(Thread):
 	def __init__ (self):
 		Thread.__init__(self)
 		self.stop = False
+
 		
 	def run(self):		
 		self.proxy = m3p.M3RtProxy()		
@@ -117,6 +118,7 @@ svc=m3.m3rt_system.M3RtService()
 svc.Startup() # Let client start rt_system
 t = None
 try:
+	time.sleep(2.0) # wait for EC kmod to get slaves in OP
 	print 'Starting M3 RPC Server on Host: ',host,' at Port: ',port,'...'
 	server = SimpleXMLRPCServer((host,port),logRequests=0)
 	server.register_introspection_functions()
@@ -124,8 +126,10 @@ try:
 	server.register_function(start_log_service)
 	server.register_function(stop_log_service)
 	server.register_function(get_log_file)
-	server.register_function(get_log_info)
-	
+	server.register_function(get_log_info)	
+
+	time.sleep(2.0) # wait for EC kmod to get slaves in OP
+
 	if make_op_all:
 		t = client_thread()
 		t.start()
