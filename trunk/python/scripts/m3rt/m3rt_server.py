@@ -68,20 +68,22 @@ def get_log_info(logname,logpath=None):
 
 
 class client_thread(Thread):
-	def __init__ (self):
+	def __init__ (self, make_all_op = True):
 		Thread.__init__(self)
 		self.stop = False
-
+		self.make_all_op = make_all_op
 		
 	def run(self):		
 		self.proxy = m3p.M3RtProxy()		
 		self.proxy.start(start_data_svc, start_ros_svc)	
-		self.proxy.make_operational_all()		
+		if self.make_all_op:
+			self.proxy.make_operational_all()		
 		try:
 			while not self.stop:				
 				time.sleep(0.2)
 		except:
-			pass
+			self.proxy.make_safe_operational_all()		
+		
 
 # ################################################################################
 host = m3t.get_local_hostname()
@@ -132,6 +134,8 @@ try:
 
 	if make_op_all:
 		t = client_thread()
+	else:
+		t = client_thread(False)
 		t.start()
 		
 	server.serve_forever()
@@ -144,8 +148,8 @@ except:
 # TODO: Find out why server_forever bombs out on CTRL-C if ROS service has been used.
 #except KeyboardInterrupt:
 #	pass
-if make_op_all:
-	t.stop = True
+#if make_op_all:
+t.stop = True
 #print "Shutting down"
 svc.Shutdown()
 
