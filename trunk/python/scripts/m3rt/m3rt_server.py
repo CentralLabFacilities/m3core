@@ -136,7 +136,7 @@ try:
 		t = client_thread()
 	else:
 		t = client_thread(False)
-		t.start()
+	t.start()
 		
 	server.serve_forever()
 	
