@@ -23,7 +23,7 @@ import m3.component_base_pb2 as mbs
 import m3.toolbox_core as m3t
 import time
 import os
-
+import string
 
 
 class M3RtProxy:
@@ -131,14 +131,30 @@ class M3RtProxy:
 	def make_operational_all(self):
 		"""Place all components in state OP"""
 		names=self.get_available_components()
-		for n in names:		
-			self.proxy.SetComponentStateOp(n)
-
+		for n in names:
+			if string.count(n,'shm') == 0: # ignore shared memory components
+				self.proxy.SetComponentStateOp(n)	
+				
 	def make_safe_operational_all(self):
 		"""Place all components in state SAFEOP"""
 		names=self.get_available_components()
+		for n in names:			
+			if string.count(n,'shm') == 0: # ignore shared memory components
+				self.proxy.SetComponentStateSafeOp(n)
+				
+	def make_operational_all_shm(self):
+		"""Place all components in state OP"""
+		names=self.get_available_components()
 		for n in names:
-			self.proxy.SetComponentStateSafeOp(n)
+			if string.count(n,'shm') > 0: # only shared memory components
+				self.proxy.SetComponentStateOp(n)
+				
+	def make_safe_operational_all_shm(self):
+		"""Place all components in state SAFEOP"""
+		names=self.get_available_components()
+		for n in names:			
+			if string.count(n,'shm') > 0: # only shared memory components
+				self.proxy.SetComponentStateSafeOp(n)
 			
 	# TODO: Fix this on m3rt side
 	'''def add_ros_component(self, name):
@@ -403,7 +419,7 @@ class M3RtProxy:
 		if type!=component.type:
 			raise m3t.M3Exception('Component type mismatch '+type+' , '+component.type)
 
-
+	# THIS IS NOT USED ANYMORE.  REPLACED BY ROS SHARED MEMORY INTERFACE
 	def __start_rt_system(self):
 		try:
 			try:

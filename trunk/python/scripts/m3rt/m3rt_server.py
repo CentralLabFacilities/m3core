@@ -68,16 +68,23 @@ def get_log_info(logname,logpath=None):
 
 
 class client_thread(Thread):
-	def __init__ (self, make_all_op = True):
+	def __init__ (self, make_all_op = True, make_all_op_shm = False, make_all_op_no_shm = False):
 		Thread.__init__(self)
 		self.stop = False
 		self.make_all_op = make_all_op
+		self.make_all_op_shm = make_all_op_shm
+		self.make_all_op_no_shm = make_all_op_no_shm
 		
 	def run(self):		
 		self.proxy = m3p.M3RtProxy()		
-		self.proxy.start(start_data_svc, start_ros_svc)	
+		self.proxy.start(start_data_svc, False)	
 		if self.make_all_op:
-			self.proxy.make_operational_all()		
+			self.proxy.make_operational_all()
+			self.proxy.make_operational_all_shm()
+		if self.make_all_op_shm:			
+			self.proxy.make_operational_all_shm()		
+		if self.make_all_op_no_shm:
+			self.proxy.make_operational_all()
 		try:
 			while not self.stop:				
 				time.sleep(0.2)
@@ -89,7 +96,8 @@ class client_thread(Thread):
 host = m3t.get_local_hostname()
 port=8000
 make_op_all = False
-start_ros_svc = False
+make_op_all_shm = False
+make_op_all_no_shm = False
 start_data_svc = False
 
 for idx in range(1,len(sys.argv)):
@@ -99,8 +107,10 @@ for idx in range(1,len(sys.argv)):
 		port=int(sys.argv[idx+1])
 	elif sys.argv[idx]=='-make_op_all' or sys.argv[idx]=='-m':
 		make_op_all = True
-	elif sys.argv[idx]=='-start_ros_svc' or sys.argv[idx]=='-r':
-		start_ros_svc = True
+	elif sys.argv[idx]=='-make_op_all_shm' or sys.argv[idx]=='-s':
+		make_op_all_shm = True
+	elif sys.argv[idx]=='-make_op_all_no_shm' or sys.argv[idx]=='-n':
+		make_op_all_no_shm = True
 	elif sys.argv[idx]=='-start_data_svc' or sys.argv[idx]=='-d':
 		start_data_svc = True
 	elif idx == 1 or sys.argv[idx]=='-help' or sys.argv[idx]=='--help':
@@ -109,7 +119,8 @@ for idx in range(1,len(sys.argv)):
 		print '   -h, -host <hostname>   specify hostname for server'
 		print '   -p, -port <port>       specify port number for server'
 		print '   -m, -make_op_all       launch server and place all components in mode Operational'
-		print '   -r, -start_ros_svc     start ros service'
+		print '   -s, -make_op_all_shm       launch server and place shared memory components in mode Operational'
+		print '   -n, -make_op_all_no_shm       launch server and place all components except shared memory in mode Operational'
 		print '   -d, -start_data_svc    start data service'
 		print '   -help                  this help screen'
 		print ''
@@ -120,7 +131,7 @@ svc=m3.m3rt_system.M3RtService()
 svc.Startup() # Let client start rt_system
 t = None
 try:
-	time.sleep(2.0) # wait for EC kmod to get slaves in OP
+	time.sleep(3.0) # wait for EC kmod to get slaves in OP
 	print 'Starting M3 RPC Server on Host: ',host,' at Port: ',port,'...'
 	server = SimpleXMLRPCServer((host,port),logRequests=0)
 	server.register_introspection_functions()
@@ -134,6 +145,10 @@ try:
 
 	if make_op_all:
 		t = client_thread()
+	elif make_op_all_shm:
+		t = client_thread(make_all_op = False, make_all_op_shm = True)
+	elif make_op_all_no_shm:
+		t = client_thread(make_all_op = False, make_all_op_no_shm = True)
 	else:
 		t = client_thread(False)
 	t.start()

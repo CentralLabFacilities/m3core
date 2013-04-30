@@ -37,11 +37,11 @@ namespace m3rt
 	FILE * pFile = NULL;
 	string path;
 	
-	if (GetEnvironmentVar(M3_ROBOT_ENV_VAR, path))
+/*	if (GetEnvironmentVar(M3_ROBOT_ENV_VAR, path))
 	{		
 		path.append(LOG_FILE);
 		pFile = fopen (path.c_str(),"a");
-	}	
+	}	*/
 	
 	 char buffer[256];
 	 va_list args;
@@ -49,12 +49,12 @@ namespace m3rt
 	 vsprintf (buffer, format, args);
 	 printf("M3 WARNING: ");
 	 printf("%s", buffer);
-	 if (pFile)
+/*	 if (pFile)
 	 {
 	    fprintf(pFile,"M3 WARNING: ");
 	    fprintf(pFile,"%s", buffer);
 	    fclose (pFile);
-	 }
+	 }*/
 	 va_end (args);
  }
 
@@ -100,11 +100,11 @@ namespace m3rt
 	FILE * pFile = NULL;
 	string path;
 	
-	if (GetEnvironmentVar(M3_ROBOT_ENV_VAR, path))
+/*	if (GetEnvironmentVar(M3_ROBOT_ENV_VAR, path))
 	{		
 		path.append(LOG_FILE);
 		pFile = fopen (path.c_str(),"a");
-	}	
+	}	*/
    
 	 char buffer[256];
 	 va_list args;
@@ -112,12 +112,12 @@ namespace m3rt
 	 vsprintf (buffer, format, args);
 	 printf("M3 INFO: ");
 	 printf("%s", buffer);
-	 if (pFile)
+/*	 if (pFile)
 	 {
 	    fprintf(pFile,"M3 INFO: ");
 	    fprintf(pFile,"%s", buffer);
 	    fclose (pFile);
-	 }
+	 }*/
 	 va_end (args);
  }
  
