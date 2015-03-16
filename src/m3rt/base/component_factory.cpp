@@ -84,14 +84,14 @@ int M3ComponentFactory::GetComponentIdx(string name)
 
 M3Component *M3ComponentFactory::GetComponent(int idx)
 {
-    if(idx <= GetNumComponents() && idx >= 0)
+    if(idx < GetNumComponents() && idx >= 0)
         return m3_list[idx];
     else return NULL;
 }
 
 string  M3ComponentFactory::GetComponentType(int idx)
 {
-    if(idx <= GetNumComponents())
+    if(idx < GetNumComponents())
         return m3_types[idx];
     else return string("");
 }
@@ -107,7 +107,7 @@ M3Component 	*M3ComponentFactory::GetComponent(string name)
 
 string  	M3ComponentFactory::GetComponentName(int idx)
 {
-    if(idx <= GetNumComponents())
+    if(idx < GetNumComponents())
         return GetComponent(idx)->GetName();
     else
         return string("");
