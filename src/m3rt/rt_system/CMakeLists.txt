@@ -8,6 +8,15 @@ set(LIBNAME "rt_system")
 include_directories(${M3RT_SRC} ${CMAKE_CURRENT_SOURCE_DIR})
 
 
+
+SET(KERNEL_HEADERS_PATH_ENV $ENV{KERNEL_HEADERS_PATH}) 
+if(DEFINED KERNEL_HEADERS_PATH_ENV)
+	message(STATUS "Using kernel headers at $ENV{KERNEL_HEADERS_PATH}")
+	include_directories( SYSTEM ${KERNEL_HEADERS_PATH})
+else(DEFINED KERNEL_HEADERS_PATH_ENV)
+	message(STATUS "Using current kernel hearders")
+endif(DEFINED KERNEL_HEADERS_PATH_ENV)
+
 if(ROS)
 message(WARNING "ROS option is deprecated!")
 add_definitions(-D_ROS_)

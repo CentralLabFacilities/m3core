@@ -43,29 +43,54 @@ if(RTAI AND NOT RTAI_FOUND)
     message(WARNING "Rtai not present, only generating python")
 endif()
 
-# Tmp solution for the FindXXX.cmake 
-set(CMAKE_MODULE_PATH 
-    "${MEKABOT}/meka-cmake-modules/Modules/"
-    ${M3_CMAKE_MODULES}
-    ${CMAKE_MODULE_PATH})
+#set(MEKABOT ${CMAKE_SOURCE_DIR})
+#set(M3RT_SRC ${MEKABOT}/m3core/src )
+#set(M3_SRC ${MEKABOT}/m3meka/src)
 
 if(NOT MEKABOT)
 message(WARNING "m3meka is not in mekabot, so the FindXXX.cmake might not be found, if so, please run:\n git clone https://github.com/ahoarau/meka-cmake-modules\n To get the FindXXX.cmake")
 endif()
 
 
+# Compile in c++11
+OPTION(C++11 "Use c++11 " 1)
 
+if(C++11)
+	set(CMAKE_CXX_FLAGS "-std=c++0x")
+	message("-- Using c++11")
+endif(C++11)
+
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -ggdb")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+# override M3RT to current dir
 set(M3RT_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # Include dirs to look for
 include_directories(
     ${M3RT_SRC}
     ${CMAKE_CURRENT_BINARY_DIR}/src # Include this directory for the generated protobufs headers
+    ${CMAKE_CURRENT_BINARY_DIR}/src/m3rt/base 
 )
+
+SET(KERNEL_HEADERS_PATH_ENV $ENV{KERNEL_HEADERS_PATH}) 
+if(DEFINED KERNEL_HEADERS_PATH_ENV)
+	message(STATUS "Using kernel headers at $ENV{KERNEL_HEADERS_PATH}")
+	include_directories( SYSTEM ${KERNEL_HEADERS_PATH})
+else(DEFINED KERNEL_HEADERS_PATH_ENV)
+	message(STATUS "Using current kernel hearders")
+endif(DEFINED KERNEL_HEADERS_PATH_ENV)
+
 
 add_subdirectory(scripts)
 add_subdirectory(src)
 add_subdirectory(python)
+
+find_package(catkin QUIET COMPONENTS std_msgs)
+if(catkin_FOUND)
+message(STATUS "Found catkin, compiling m3_msgs")
+add_subdirectory(ros/m3_msgs)
+endif(catkin_FOUND)
 
 if(M3_SRC AND NOT MEKABOT)
 configure_file(setup.bash.in ${CMAKE_CURRENT_BINARY_DIR}/setup.bash)
