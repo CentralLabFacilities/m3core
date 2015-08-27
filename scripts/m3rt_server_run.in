@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-virtual=${VIRTUAL}
+virtual=0
 
 kernel_name=$(uname -r);
 
@@ -13,6 +13,24 @@ then
   exit
 fi
 
+LOCKFILE=/tmp/m3rt_server.lock
+
+function cleanup {
+    echo cleanup
+    rm $LOCKFILE
+}
+
+# if lockfile exists, try to kill the pid
+if [ -f "$LOCKFILE" ]; then
+    m3rt_server_kill
+fi
+
+function kill_and_clean {
+    echo killing
+    kill -SIGINT $PID
+    cleanup
+}
+trap kill_and_clean SIGHUP SIGINT SIGTERM
 
 if $(m3rt_check_server.py) 2>/dev/null ; then
     if [ $virtual = 0 ]; then
@@ -27,13 +45,20 @@ if $(m3rt_check_server.py) 2>/dev/null ; then
     echo 'Running insmods'
     m3rt_insmods
     echo 'Running m3rt server'
-    m3rt_server.py $@
+    m3rt_server.py $@ &
+    PID=$!
+    # write pid to lockfile
+    echo $PID > $LOCKFILE
+
+    while kill -0 $PID 2> /dev/null; do
+        sleep 1
+    done
+
     echo 'Running rmmods'
     m3rt_rmmods
 else
     echo 'Server already running, abording'
 fi
-
 
 
 
