@@ -282,6 +282,16 @@ class M3RtProxy:
 
     def get_num_components(self):
         return self.proxy.GetNumComponents()
+        
+    def get_num_operational_components(self):
+        names=self.get_available_components()
+        count = 0
+        for n in names:
+            if self.proxy.GetComponentState(n)==3:
+                count = count +1
+            else:
+                print n, ' is ', self.proxy.GetComponentState(n)
+        return count
     
     def is_component_available(self,name):
         """Is component loaded on the server"""
