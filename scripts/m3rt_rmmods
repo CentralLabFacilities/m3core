@@ -9,10 +9,11 @@ sync
 $SUDO $rmmod m3ec.ko
 #sync paranoia might be useful
 sync
+$SUDO $rmmod rtai_wd
+sync
 $SUDO $rmmod rtai_shm
 sync
 $SUDO $rmmod rtai_sem
-
 sync
 $SUDO $rmmod rtai_sched
 sync
