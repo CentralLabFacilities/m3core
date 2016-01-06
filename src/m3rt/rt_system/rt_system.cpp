@@ -83,7 +83,7 @@ void *rt_system_thread(void *arg)
         tick_period = nano2count(RT_TIMER_TICKS_NS);
     }
     M3_INFO("Beginning RTAI Initialization.\n");
-    if(!( task = rt_task_init_schmod(nam2num("M3SYS"), 0, 0, 0, SCHED_FIFO, 0xF))) {
+    if(!( task = rt_task_init_schmod(nam2num("M3SYS"), 2, 0, 0, SCHED_FIFO, 0xF))) {
         m3rt::M3_ERR("Failed to create RT-TASK M3SYS\n", 0);
         m3sys->sys_thread_active = false;
         return 0;

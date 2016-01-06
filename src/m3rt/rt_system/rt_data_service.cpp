@@ -66,7 +66,7 @@ void data_thread(void * arg)
 	//Need to consider multiple threads, name conflict
 	ss << "M3DSV" << svc->instances;
 	ss >> rt_name;
-	task = rt_task_init_schmod(nam2num(rt_name.c_str()), 0, 0, 0, SCHED_FIFO, 0xF); 
+	task = rt_task_init_schmod(nam2num(rt_name.c_str()), 4, 0, 0, SCHED_FIFO, 0xF); 
 	svc->instances++;
 	if (task==NULL)
 	{

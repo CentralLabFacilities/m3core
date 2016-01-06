@@ -56,7 +56,7 @@ static void* log_thread(void * arg)
 	// TODO: Add the semaphore back in?
 #ifdef __RTAI__	
 	RT_TASK *task;
-	task = rt_task_init_schmod(nam2num("M3LSV"), 0, 0, 0, SCHED_FIFO, 0xF); 
+	task = rt_task_init_schmod(nam2num("M3LSV"), 5, 0, 0, SCHED_FIFO, 0xF); 
 	if (task==NULL)
 	{
 		M3_ERR("Failed to create M3RtLogService RT Task\n",0);

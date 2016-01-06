@@ -586,7 +586,7 @@ int __init init_mod(void)
             tick_period = requested_ticks;
             M3_WARN("Rt timer already started.\n", tick_period, requested_ticks,t_critical);
         }
-	if (rt_task_init(&task, run, 0, RT_STACK_SIZE, 0, 1, NULL)) { // A.H: 0 is highest priority
+	if (rt_task_init(&task, run, 0, RT_STACK_SIZE, 1, 1, NULL)) { // A.H: 0 is highest priority
 		M3_ERR("Failed to init RtAI task!\n");
 		goto out_free_timer;
 	}

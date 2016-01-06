@@ -54,7 +54,7 @@ void *async_io_thread(void * arg)
 	}
 	
   
-  task = rt_task_init_schmod(nam2num(t_name), 0, 0, 0, SCHED_FIFO, 0xFF);
+  task = rt_task_init_schmod(nam2num(t_name), 3, 0, 0, SCHED_FIFO, 0xFF);
   if (task==NULL)
   {
 	  M3_ERR("Failed to create RT-TASK M3ASY\n",0);	  
