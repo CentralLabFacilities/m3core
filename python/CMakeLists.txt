@@ -27,12 +27,24 @@ string ( REGEX REPLACE "^${PYTHON_PREFIX}/" ""
    PYTHON_SITE_DIR "${PYTHON_SITE_DIR}" 
 )
 set(M3CORE_PYTHON_DIR ${PYTHON_SITE_DIR} PARENT_SCOPE)
+
+#catkin does not install in /usr/local as root so user needs executable rights   
+if(NOT ${CMAKE_INSTALL_PREFIX} MATCHES "/usr/(.*)")
 install (
-	FILES ${${PROJECT_NAME}_m3} 
-	PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ WORLD_EXECUTE
-	DESTINATION ${PYTHON_SITE_DIR}/m3
-	COMPONENT library
+        FILES ${${PROJECT_NAME}_m3}
+        PERMISSIONS OWNER_WRITE OWNER_EXECUTE OWNER_READ GROUP_READ WORLD_READ
+        DESTINATION ${PYTHON_SITE_DIR}/m3
+        COMPONENT library
 )
+else()
+install (
+        FILES ${${PROJECT_NAME}_m3}
+        PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ WORLD_EXECUTE
+        DESTINATION ${PYTHON_SITE_DIR}/m3
+        COMPONENT library
+)
+endif()
+
 
 ## Hardly Cpackable, let's use the above (simple) way instead
 #find_program(PYTHON "python")
