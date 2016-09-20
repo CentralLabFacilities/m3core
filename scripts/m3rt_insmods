@@ -44,7 +44,7 @@ $SUDO $insmod $MODULES/rtai_shm.ko;
 
 echo 'Inserting rtai_wd'
 sync
-$SUDO $insmod $MODULES/rtai_wd.ko Policy=1; #1=RESYNC, 5=SUSPEND Policy.
+$SUDO $insmod $MODULES/rtai_wd.ko Policy=5; #1=RESYNC, 5=SUSPEND Policy.
 
 sync
 echo 'Inserting m3ec'
