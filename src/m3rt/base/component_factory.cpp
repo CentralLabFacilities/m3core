@@ -89,28 +89,31 @@ M3Component *M3ComponentFactory::GetComponent(int idx)
     else return NULL;
 }
 
-string  M3ComponentFactory::GetComponentType(int idx)
+string M3ComponentFactory::GetComponentType(int idx)
 {
     if(idx < GetNumComponents())
         return m3_types[idx];
     else return string("");
 }
 
-int 			M3ComponentFactory::GetNumComponents()
+int M3ComponentFactory::GetNumComponents()
 {
     return m3_list.size();
 }
-M3Component 	*M3ComponentFactory::GetComponent(string name)
+M3Component *M3ComponentFactory::GetComponent(string name)
 {
     return GetComponent(GetComponentIdx(name));
 }
 
-string  	M3ComponentFactory::GetComponentName(int idx)
+string M3ComponentFactory::GetComponentName(int idx)
 {
+    string a;
     if(idx < GetNumComponents())
-        return GetComponent(idx)->GetName();
-    else
-        return string("");
+        a = GetComponent(idx)->GetName();
+    else {
+        a = string("");
+    }
+    return a;
 }
 
 bool M3ComponentFactory::AddComponentLibrary(string lib)

@@ -203,14 +203,14 @@ public:
      * @param idx
      * @return const char
      */
-    const char *  GetComponentName(int idx);
+    std::string GetComponentName(int idx);
     /**
      * @brief
      *
      * @param idx
      * @return const char
      */
-    const char *  GetComponentType(int idx);
+    std::string GetComponentType(int idx);
     /**
      * @brief
      *

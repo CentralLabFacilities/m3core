@@ -296,18 +296,18 @@ int M3RtService::GetNumComponents()
     return rt_system->GetNumComponents();
 }
 
-const char *  M3RtService::GetComponentName(int idx)
+std::string M3RtService::GetComponentName(int idx)
 {
     if (!rt_system )
         return "";
-    return rt_system->GetComponentName(idx).c_str();
+    return rt_system->GetComponentName(idx);
 }
 
-const char *  M3RtService::GetComponentType(int idx)
+std::string M3RtService::GetComponentType(int idx)
 {
     if (!rt_system)
         return "";
-    return rt_system->GetComponentType(idx).c_str();
+    return rt_system->GetComponentType(idx);
 }
 
 int M3RtService::GetComponentIdx(const char * name)
