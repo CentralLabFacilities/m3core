@@ -93,14 +93,14 @@ public:
      * @param name
      * @return bool
      */
-    bool SetComponentStateSafeOp(char * name);
+    bool SetComponentStateSafeOp(std::string name);
     /**
      * @brief
      *
      * @param name
      * @return bool
      */
-    bool SetComponentStateOp(char * name);
+    bool SetComponentStateOp(std::string name);
     /**
      * @brief
      *
@@ -146,15 +146,15 @@ public:
      * @param verbose
      * @return bool
      */
-    bool AttachLogService(char * name, char * path, double freq,int page_size,int verbose);
-	//bool AddRosComponent(const char * name);
+    bool AttachLogService(std::string name, std::string path, double freq,int page_size,int verbose);
+	//bool AddRosComponent(const std::string name);
     /**
      * @brief
      *
      * @param name
      * @return bool
      */
-    bool AddLogComponent(char * name){log_components.push_back(name);}
+    bool AddLogComponent(std::string name){log_components.push_back(name);}
     /**
      * @brief
      *
@@ -217,21 +217,21 @@ public:
      * @param name
      * @return int
      */
-    int GetComponentState(const char * name);
+    int GetComponentState(const std::string name);
     /**
      * @brief
      *
      * @param name
      * @return int
      */
-    int GetComponentIdx(const char * name);
+    int GetComponentIdx(const std::string name);
     /**
      * @brief
      *
      * @param name
      * @return bool
      */
-    bool PrettyPrintComponent(const char * name);
+    bool PrettyPrintComponent(const std::string name);
     /**
      * @brief
      *
@@ -245,7 +245,7 @@ public:
      * @param port
      * @return bool
      */
-    bool ClientSubscribeStatus(const char * name, int port);
+    bool ClientSubscribeStatus(const std::string name, int port);
     /**
      * @brief
      *

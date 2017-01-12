@@ -35,16 +35,18 @@ class M3RtSystem;
 /**
  * @brief
  *
- * A component can be in one of 4 states: \n
+ * A component can be in one of 5 states: \n
  *         M3COMP_STATE_INIT = 0; \n
  *         M3COMP_STATE_ERR = 1; \n
  *         M3COMP_STATE_SAFEOP = 2; \n
  *         M3COMP_STATE_OP = 3; \n
+ *         M3COMP_STATE_DISABLED = 4; \n
  *    \n
  *    State INIT: On creation, Startup() not yet called.\n
  *    State OP: Initialized, running normally. Status and Command data is modified. A module must be placed in OP by an external process.\n
  *    State SAFEOP: Only Status data is modified. SAFEOP is set externally in case of system error.\n
  *    State ERR: A non-recoverable error or safety exception has been triggered.\n
+ *    State DISABLD: Since the rt system can not be altered once it has been started, the disabled state is used if a component is supposed to start computation, i.e. to skip StepCommand and StepStatus.\n
  *    \n
  *    Each component must implement  Startup, Shutdown, StepStateOp, StepStateSafeOp, StepStateError \n
  *    After successful Startup,     it should do a SetStateSafeOp else SetStateError\n
@@ -118,6 +120,11 @@ class M3Component{
         /**
          * @brief
          *
+         */
+        void SetStateDisabled(){if (!IsStateError()) GetBaseStatus()->set_state(M3COMP_STATE_DISABLED);}
+        /**
+         * @brief
+         *
          * @return bool
          */
         bool IsStateError(){return GetBaseStatus()->state() == M3COMP_STATE_ERR;}
@@ -133,6 +140,12 @@ class M3Component{
          * @return bool
          */
         bool IsStateOp(){return GetBaseStatus()->state() == M3COMP_STATE_OP;}
+        /**
+         * @brief
+         *
+         * @return bool
+         */
+        bool IsStateDisabled(){return GetBaseStatus()->state() == M3COMP_STATE_DISABLED;}
         /**
          * @brief
          *
@@ -291,17 +304,15 @@ class M3Component{
         virtual bool ReadConfig(const char * filename);
         m3rt::M3ComponentFactory * factory; 
         int priority; 
-                bool verbose_; 
+        bool verbose_; 
         std::vector<std::string> version_names; 
         std::vector<int> version_ids; 
         int version_id; 
         YAML::Node doc; 
         std::string doc_path; 
 };
-
-//Factory defn.
 /**
- * @brief
+ * @brief Factory defn.
  *
  */
 typedef M3Component * create_comp_t();
@@ -310,9 +321,9 @@ typedef M3Component * create_comp_t();
  *
  */
 typedef void destroy_comp_t(M3Component *);
-extern std::map< std::string, create_comp_t *, std::less<std::string> > creator_factory;	//global 
-extern std::map< std::string, destroy_comp_t *, std::less<std::string> > destroyer_factory; //global 
 
+extern std::map< std::string, create_comp_t *, std::less<std::string> > creator_factory; //global 
+extern std::map< std::string, destroy_comp_t *, std::less<std::string> > destroyer_factory; //global 
 }
 
 #endif

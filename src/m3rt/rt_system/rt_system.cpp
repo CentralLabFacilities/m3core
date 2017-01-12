@@ -749,15 +749,16 @@ bool M3RtSystem::Step(bool safeop_only,bool dry_run)
 
     }
 
-    
-    int nop = 0, nsop = 0, nerr = 0;
+    int nop = 0, nsop = 0, nerr = 0, ndis = 0;
     for(int i = 0; i < GetNumComponents(); i++) {
         if(GetComponent(i)->IsStateError()) nerr++;
         if(GetComponent(i)->IsStateSafeOp()) nsop++;
         if(GetComponent(i)->IsStateOp()) nop++;
+        if(GetComponent(i)->IsStateDisabled()) ndis++;
         M3MonitorComponent *c = s->mutable_components(i);
         c->set_state((M3COMP_STATE)GetComponent(i)->GetState());
     }
+
     if(m3ec_list.size() != 0) {
         for(int i = 0; i < NUM_EC_DOMAIN; i++) {
             s->mutable_ec_domains(i)->set_t_ecat_wait_rx(shm_ec->monitor[i].t_ecat_wait_rx);
@@ -771,6 +772,7 @@ bool M3RtSystem::Step(bool safeop_only,bool dry_run)
     s->set_num_components_safeop(nsop);
     s->set_num_components_op(nop);
     s->set_num_components_err(nerr);
+    s->set_num_components_disabled(ndis);
     s->set_num_components(GetNumComponents());
     s->set_num_components_ec(m3ec_list.size());
     s->set_num_components_rt(m3rt_list.size());

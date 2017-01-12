@@ -80,7 +80,8 @@ void M3Component::PrettyPrint()
         "M3COMP_STATE_INIT",
         "M3COMP_STATE_ERR",
         "M3COMP_STATE_SAFEOP",
-        "M3COMP_STATE_OP"
+        "M3COMP_STATE_OP",
+        "M3COMP_STATE_DISABLED"
     };
     M3_PRINTF("State:  %s\n", m3sys_state_names[(int)GetBaseStatus()->state()]);
     BannerPrint(60, "Status");

@@ -169,7 +169,7 @@ int M3RtService::RemoveRtSystem()
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
-bool M3RtService::AttachLogService(char * name, char * path, double freq,int page_size,int verbose)
+bool M3RtService::AttachLogService(std::string name, std::string path, double freq,int page_size,int verbose)
 {
     m3rt::M3_DEBUG("Attaching M3RtLogService: %s\n",name);
     if (rt_system==NULL || IsLogServiceRunning())
@@ -272,7 +272,7 @@ bool M3RtService::RemoveDataService(int port)
 }
 //////////////////////////////////////////////////////////////////////////////////////
 
-bool M3RtService::ClientSubscribeStatus(const char * name, int port)
+bool M3RtService::ClientSubscribeStatus(const std::string name, int port)
 {
     if (IsDataServiceRunning() && !svc_thread_end)
     {
@@ -298,7 +298,7 @@ int M3RtService::GetNumComponents()
 
 std::string M3RtService::GetComponentName(int idx)
 {
-    if (!rt_system )
+    if (!rt_system)
         return "";
     return rt_system->GetComponentName(idx);
 }
@@ -310,14 +310,14 @@ std::string M3RtService::GetComponentType(int idx)
     return rt_system->GetComponentType(idx);
 }
 
-int M3RtService::GetComponentIdx(const char * name)
+int M3RtService::GetComponentIdx(const std::string name)
 {
     if (!rt_system)
         return -1;
     return rt_system->GetComponentIdx(std::string(name));
 }
 
-int M3RtService::GetComponentState(const char * name)
+int M3RtService::GetComponentState(const std::string name)
 {
     int idx=GetComponentIdx(name);
     if (idx>=0)
@@ -325,7 +325,7 @@ int M3RtService::GetComponentState(const char * name)
     return -1;
 }
 
-bool  M3RtService::PrettyPrintComponent(const char * name)
+bool  M3RtService::PrettyPrintComponent(const std::string name)
 {
     int idx=GetComponentIdx(name);
     if (idx>=0)
@@ -336,7 +336,7 @@ bool  M3RtService::PrettyPrintComponent(const char * name)
     return false;
 }
 
-bool M3RtService::SetComponentStateOp(char * name)
+bool M3RtService::SetComponentStateOp(std::string name)
 {
 
     int idx=GetComponentIdx(name);
@@ -349,7 +349,7 @@ bool M3RtService::SetComponentStateOp(char * name)
     }
     return false;
 }
-bool M3RtService::SetComponentStateSafeOp(char * name)
+bool M3RtService::SetComponentStateSafeOp(std::string name)
 {
 
     int idx=GetComponentIdx(name);
@@ -372,7 +372,7 @@ bool M3RtService::PrettyPrintRtSystem()
     return false;
 }
 
-/*bool M3RtService::AddRosComponent(const char * name)
+/*bool M3RtService::AddRosComponent(const std::string name)
 {
     if (rt_system==NULL)
     return false;

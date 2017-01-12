@@ -79,6 +79,7 @@ int M3ComponentFactory::GetComponentIdx(string name)
         if(name.compare(GetComponentName(idx)) == 0)
             return idx;
     }
+    M3_WARN("Component name %s not in component_list.\n",name.c_str());
     return -1;
 }
 
@@ -86,14 +87,20 @@ M3Component *M3ComponentFactory::GetComponent(int idx)
 {
     if(idx < GetNumComponents() && idx >= 0)
         return m3_list[idx];
-    else return NULL;
+    else { 
+        M3_WARN("Index %i outside of m3_list.\n",idx);
+        return NULL;
+    }
 }
 
 string M3ComponentFactory::GetComponentType(int idx)
 {
     if(idx < GetNumComponents())
         return m3_types[idx];
-    else return string("");
+    else {
+        M3_WARN("Index %i outside of m3_list.\n",idx);
+        return string("");
+    }
 }
 
 int M3ComponentFactory::GetNumComponents()
@@ -201,7 +208,7 @@ M3Component *M3ComponentFactory::CreateComponent(string type)
         if((*si).compare(type) == 0) {
             m = creator_factory[type]();
             if(m != NULL) {
-                //M3_INFO("Creating: %s\n",type.c_str());
+                M3_INFO("Creating: %s\n",type.c_str());
                 m3_list.push_back(m);
                 // If type ends in '_virtual', we want want to store it as it's base type
                 int pos = type.find("virtual");

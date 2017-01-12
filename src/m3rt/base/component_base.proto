@@ -1,4 +1,3 @@
-
 // M3 -- Meka Robotics Real-Time Control System
 // Copyright (c) 2010 Meka Robotics
 // Author: edsinger@mekabot.com (Aaron Edsinger)
@@ -34,7 +33,6 @@ message M3CommandAll{
 	repeated bytes  datum_param= 4;
 }
 
-
 message M3StatusLogPage{
 	repeated M3StatusAll entry=1;
 }
@@ -46,8 +44,8 @@ enum M3COMP_STATE{
 		M3COMP_STATE_ERR = 1;
 		M3COMP_STATE_SAFEOP = 2;
 		M3COMP_STATE_OP = 3;
+		M3COMP_STATE_DISABLED = 4;
 }
-
 
 message M3BaseStatus{
     optional string name=1;
@@ -56,6 +54,7 @@ message M3BaseStatus{
     optional string rate=4 [default = "fast"];
     optional string version=5;
 }
+
 ///////////////////////////////  EtherCAT  //////////////////////////////////////////////////////////
 
 message M3EtherCATStatus{
@@ -68,10 +67,10 @@ message M3EtherCATStatus{
     optional int32 al_state = 7;
     optional string pdo_version=20;				//PDO version identifier
 }
+
 ///////////////////////////////  Monitor  //////////////////////////////////////////////////////////
 
-message M3MonitorComponent
-{
+message M3MonitorComponent{
 	optional string name =1;
 	optional M3COMP_STATE state=2;
 	optional double cycle_time_status_us=3;
@@ -86,28 +85,28 @@ message M3MonitorParam{
 
 message M3MonitorStatus{
 	optional M3BaseStatus base=1;
-    optional int32 num_components_rt=2;
-    optional int32 num_components_ec=3;
-    optional int32 num_components=4;
-    optional int32 num_components_safeop=5;
-    optional int32 num_components_op=6;
-    optional int32 num_components_err=7;
-    optional bool operational=8;
-    optional double cycle_time_status_us=9;
-    optional double cycle_time_command_us=10;
-    optional double cycle_time_us=11;    
-	optional double cycle_frequency_hz=12;
-	repeated M3MonitorComponent components=13;
-	optional int32 num_ethercat_cycles=14;
- 	optional double cycle_time_max_us=15;
-    repeated M3MonitorEcDomain ec_domains=16;        
-        optional int64 t_ext_sem_wait=17;
-        optional int64 t_sync_sem_wait=18;
-        optional int64 t_shm_sem_wait=19;
+  optional int32 num_components_rt=2;
+  optional int32 num_components_ec=3;
+  optional int32 num_components=4;
+  optional int32 num_components_safeop=5;
+  optional int32 num_components_op=6;
+  optional int32 num_components_err=7;
+  optional int32 num_components_disabled=8;
+  optional bool operational=9;
+  optional double cycle_time_status_us=10;
+  optional double cycle_time_command_us=11;
+  optional double cycle_time_us=12;    
+	optional double cycle_frequency_hz=13;
+	repeated M3MonitorComponent components=14;
+	optional int32 num_ethercat_cycles=15;
+ 	optional double cycle_time_max_us=16;
+  repeated M3MonitorEcDomain ec_domains=17;        
+  optional int64 t_ext_sem_wait=18;
+  optional int64 t_sync_sem_wait=19;
+  optional int64 t_shm_sem_wait=20;
 }
 
-message M3MonitorEcDomain
-{
+message M3MonitorEcDomain{
   optional int64 t_ecat_wait_rx=1;
   optional int64 t_ecat_rx=2;
   optional int64 t_ecat_wait_shm=3;
