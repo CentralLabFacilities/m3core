@@ -20,6 +20,7 @@
 EXTRA_CFLAGS := -I/opt/etherlab/include/ \
 		-I/usr/local/src/ethercat/master/ \
 		-I/usr/src/ethercat/master/ \
+		-I${CMAKE_INSTALL_PREFIX}/src/ethercat/master/ \
 		-I${RTAI_INCLUDE_DIR} \
 		-I${M3RT_SRC} \
 		-D__IN_RTAI__ -ffast-math 
