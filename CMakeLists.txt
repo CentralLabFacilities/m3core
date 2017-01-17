@@ -55,15 +55,8 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/src/m3rt/base 
 )
 
-SET(KERNEL_HEADERS_PATH_ENV $ENV{KERNEL_HEADERS_PATH}) 
-if(DEFINED KERNEL_HEADERS_PATH_ENV)
-        message(STATUS "Using kernel headers at $ENV{KERNEL_HEADERS_PATH}")
-        include_directories( SYSTEM ${KERNEL_HEADERS_PATH})
-        SET(KERNEL_DIR ${KERNEL_HEADERS_PATH_ENV})
-else(DEFINED KERNEL_HEADERS_PATH_ENV)
-        message(STATUS "Using kernel headers src from ${CMAKE_INSTALL_PREFIX}/src/linux-headers-${CMAKE_SYSTEM_VERSION}")
-        SET(KERNEL_DIR "${CMAKE_INSTALL_PREFIX}/src/linux-headers-${CMAKE_SYSTEM_VERSION}")
-endif(DEFINED KERNEL_HEADERS_PATH_ENV)
+message(STATUS "Using kernel headers src from ${CMAKE_INSTALL_PREFIX}/usr/src/linux-headers-${CMAKE_SYSTEM_VERSION}")
+SET(KERNEL_DIR "${CMAKE_INSTALL_PREFIX}/usr/src/linux-headers-${CMAKE_SYSTEM_VERSION}")
 
 add_subdirectory(scripts)
 add_subdirectory(src)
@@ -108,4 +101,3 @@ IF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
   #SET(CPACK_COMPONENTS_ALL Libraries ApplicationData)
   INCLUDE(CPack)
 ENDIF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
-
