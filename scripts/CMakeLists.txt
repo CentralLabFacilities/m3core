@@ -8,12 +8,14 @@ endif()
 
 configure_file(uninstall_m3.in ${CMAKE_CURRENT_BINARY_DIR}/uninstall_m3)
 configure_file(m3rt_server_run.in ${CMAKE_CURRENT_BINARY_DIR}/m3rt_server_run)
+configure_file(m3rt_insmods.in ${CMAKE_CURRENT_BINARY_DIR}/m3rt_insmods)
+configure_file(m3rt_rmmods.in ${CMAKE_CURRENT_BINARY_DIR}/m3rt_rmmods)
 
 set(M3RTSCRIPTS
 disable_ros
 lsec
-m3rt_insmods
-m3rt_rmmods
+${CMAKE_CURRENT_BINARY_DIR}/m3rt_insmods
+${CMAKE_CURRENT_BINARY_DIR}/m3rt_rmmods
 m3rt_ethercat_check
 m3rt_rotate_logs
 m3rt_server_debug
