@@ -44,9 +44,7 @@ if $(m3rt_check_server.py) 2>/dev/null ; then
     fi
     echo 'Running insmods'
     m3rt_insmods
-    echo 'Sleeping after insmods'
     sync
-    sleep 4
     echo 'Running m3rt server'
     m3rt_server.py $@ &
     PID=$!
