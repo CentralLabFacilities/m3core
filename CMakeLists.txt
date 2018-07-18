@@ -62,12 +62,6 @@ add_subdirectory(scripts)
 add_subdirectory(src)
 add_subdirectory(python)
 
-find_package(catkin QUIET COMPONENTS std_msgs)
-if(catkin_FOUND)
-    message(STATUS "Found catkin, compiling m3_msgs")
-    add_subdirectory(ros/m3_msgs)
-endif(catkin_FOUND)
-
 if(M3_SRC AND NOT MEKABOT)
   configure_file(setup.bash.in ${CMAKE_CURRENT_BINARY_DIR}/setup.bash)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/setup.bash DESTINATION share)
